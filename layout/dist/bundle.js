@@ -1,1 +1,1 @@
-console.log(1);
+(()=>{"use strict";var e;(e=document.querySelector(".header-contacts")).addEventListener("click",(function(t){var c=t.target;c.closest(".header-contacts__arrow")&&(console.log(c),e.classList.toggle("active"))}))})();

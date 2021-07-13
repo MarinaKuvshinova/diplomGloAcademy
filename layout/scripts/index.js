@@ -1,12 +1,9 @@
-// 'use strict';
+'use strict';
 
-// import countTimer from './modules/countTimer';
+import openClosePhone from './modules/openClosePhone';
 
 
-// //Timer
-// countTimer('10 july 2021');
-
-// //menu
-// toggleMenu();
+//openClose phone
+openClosePhone();
 
 
