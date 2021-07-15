@@ -1716,6 +1716,13 @@ template, [hidden] {
     color: #322823;
 }
 
+.nav-wrap-repair .nav-arrow {
+    background: none;
+    outline: none;
+    padding: 0;
+    border: 0;
+}
+
 @media (max-width: 1024px) {
     .repair-types-nav__item {
         height: 37px;
@@ -2473,6 +2480,15 @@ div.wave-block:nth-child(17):after {
 
 .transparency-slider-wrap {
     margin-top: 150px;
+}
+
+@media (max-width: 1100px) {
+    .transparency-slider-wrap {
+        margin-left: auto;
+        margin-right: auto;
+        width: 65vw;
+        max-width: 460px;
+    }
 }
 
 @media (max-width: 1024px) {
@@ -4183,7 +4199,6 @@ div.wave-block:nth-child(17):after {
 
 .reviews-slider {
     height: 314px;
-    overflow: hidden;
 }
 
 .reviews-slider-wrap {
@@ -4192,7 +4207,10 @@ div.wave-block:nth-child(17):after {
     margin-top: 125px;
     margin-left: auto;
     margin-right: auto;
+    width: 65vw;
+
 }
+
 
 @media (max-width: 1024px) {
     .reviews-slider-wrap {
@@ -4250,7 +4268,8 @@ div.wave-block:nth-child(17):after {
 .reviews-slider__slide-descr {
     position: relative;
     margin-top: 11px;
-    width: 494px;
+    max-width: 494px;
+    width: 100%;
     line-height: 23px;
     font-size: 14px;
 }
@@ -7284,6 +7303,17 @@ div.wave-block:nth-child(17):after {
     display: block;
 }
 
+@media (min-width: 1025px) {
+    .nav-list-repair.carousel__wrap {
+        display: block !important;
+    }
+
+    .nav-list-repair.carousel__wrap > * {
+        display: block;
+        margin: 22px;
+    }
+}
+
 @media (max-width: 1024px) {
     .nav-list-repair {
         min-width: 1200px;
@@ -7294,11 +7324,17 @@ div.wave-block:nth-child(17):after {
         flex-wrap: wrap;
         max-width: 100%;
     }
+    .nav-list-repair.carousel__wrap {
+        min-width: 100%;
+    }
 }
 
 @media (max-width: 575px) {
     .nav-list-repair {
         min-width: 1086px;
+    }
+    .nav-list-repair.carousel__wrap {
+        min-width: 100%;
     }
 }
 
@@ -8459,7 +8495,7 @@ body {
     font-family: "Noto Sans SC", sans-serif;
     color: #322823;
     background: #FBFAF8 url("../images/bodybackground.svg") 0 3555px/100% 2984px no-repeat;
-    overflow-x: hidden;
+    min-width: 320px;
 }
 
 @media (max-width: 1024px) {
@@ -9064,4 +9100,33 @@ strong {
 }
 .sliderFade .slide.active-slider {
     opacity: 1;
+}
+
+.carousel {
+}
+.carousel__wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex !important;
+    transition: transform .5s ease-in-out;
+    -webkit-transition: transform .5s ease-in-out;
+    will-change: transform;
+    flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+}
+.carousel .holder {
+    overflow: hidden;
+}
+.carousel__item {
+    margin: auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 100%;
+}
+.page {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
 }

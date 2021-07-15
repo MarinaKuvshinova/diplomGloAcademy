@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="./css/style.css">
 	<title>Relax Live</title></head>
 <body>
+	<div class="page">
 	<div class="main" id="main">
 		<header class="header">
 			<div class="header-contacts">
@@ -408,6 +409,7 @@
 					<div class="nav-wrap nav-wrap-repair">
 						<nav class="nav repair-types-nav">
 							<div class="nav-list nav-list-repair tabs-nav">
+								<div>
 								<button type="button" class="button_o repair-types-nav__item repair-types-nav__item-1 active" data-tab="tab1">
 									<svg width="259" height="46" fill="none" viewBox="0 0 259 46" preserveAspectRatio="xMinYMin meet">
 										<path
@@ -416,6 +418,8 @@
 									</svg>
 									Частичный ремонт
 								</button><!-- /.repair-types__nav-item -->
+							</div>
+							<div>
 								<button type="button" class="button_o repair-types-nav__item repair-types-nav__item-2"  data-tab="tab2">
 									<svg width="300" height="46" fill="none" viewBox="0 0 300 46" preserveAspectRatio="xMinYMin meet">
 										<path
@@ -423,7 +427,8 @@
 												stroke="#EEEBE5" stroke-width="2" stroke-linecap="round"></path>
 									</svg>
 									Косметический ремонт
-								</button><!-- /.repair-types__nav-item -->
+								</button><!-- /.repair-types__nav-item --></div>
+								<div>
 								<button type="button" class="button_o repair-types-nav__item repair-types-nav__item-3"  data-tab="tab3">
 									<svg width="281" height="46" fill="none" viewBox="0 0 281 46" preserveAspectRatio="xMinYMin meet">
 										<path
@@ -431,36 +436,24 @@
 												stroke="#EEEBE5" stroke-width="2" stroke-linecap="round"></path>
 									</svg>
 									Капитальный ремонт
-								</button><!-- /.repair-types__nav-item -->
-								<button type="button" class="button_o repair-types-nav__item repair-types-nav__item-4"  data-tab="tab4">
+								</button></div><!-- /.repair-types__nav-item -->
+								<div><button type="button" class="button_o repair-types-nav__item repair-types-nav__item-4"  data-tab="tab4">
 									<svg width="268" height="46" fill="none" viewBox="0 0 268 46" preserveAspectRatio="xMinYMin meet">
 										<path
 												d="M34.25 1H23C10.85 1 1 10.85 1 23s9.85 22 22 22h195.164M49.836 1H245c12.15 0 22 9.85 22 22s-9.85 22-22 22h-18.627"
 												stroke="#EEEBE5" stroke-width="2" stroke-linecap="round"></path>
 									</svg>
 									Евроремонт ремонт
-								</button><!-- /.repair-types__nav-item -->
-								<button type="button" class="button_o repair-types-nav__item repair-types-nav__item-5"  data-tab="tab5">
+								</button></div><!-- /.repair-types__nav-item -->
+								<div><button type="button" class="button_o repair-types-nav__item repair-types-nav__item-5"  data-tab="tab5">
 									<svg width="324" height="46" fill="none" viewBox="0 0 324 46" preserveAspectRatio="xMinYMin meet">
 										<path
 												d="M41.25 1H23C10.85 1 1 10.85 1 23s9.85 22 22 22h240.883M60.117 1H301c12.15 0 22 9.85 22 22s-9.85 22-22 22h-27.18"
 												stroke="#EEEBE5" stroke-width="2" stroke-linecap="round"></path>
 									</svg>
 									Индивидуальный ремонт
-								</button><!-- /.repair-types__nav-item --></div>
+								</button></div><!-- /.repair-types__nav-item --></div>
 						</nav><!-- /.repair-types__nav -->
-						<div class="nav-arrow nav-arrow_left desktop-hide" id="nav-arrow-repair-left_base">
-							<svg width="12" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M11 1L1 8l10 7" stroke="#322823" stroke-width=".3" stroke-linecap="round"
-									  stroke-linejoin="round"></path>
-							</svg>
-						</div>
-						<div class="nav-arrow nav-arrow_right desktop-hide" id="nav-arrow-repair-right_base">
-							<svg width="12" height="16" fill="none" xmlns="http://www.w3.org/2000/svg">
-								<path d="M1 1l10 7-10 7" stroke="#322823" stroke-width=".3" stroke-linecap="round"
-									  stroke-linejoin="round"></path>
-							</svg>
-						</div>
 					</div><!-- /.repair-types__nav-wrap -->
 					<div class="link-list link-list-repair mobile-hide tablet-hide"><a class="open-repair-types open-popup">Полный список услуг и цен
 						<div>
@@ -659,7 +652,8 @@
 				<span><strong>клиентом</strong> честно и прозрачно</span></div>
 			<div class="section-subtitle">Никаких скрытых платежей и сорванных сроков!</div>
 			<div class="transparency-slider-wrap">
-				<div class="transparency-slider row">
+				<div class="holder">
+				<div class="transparency-slider">
 					<div class="transparency-item">
 						<div class="transparency-item__img open-transparency open-popup">
 							<img src="./images/transparency/item_img.jpg" alt="document">
@@ -703,6 +697,7 @@
 						</div>
 					</div>
 				</div><!-- /transparency-slider row -->
+				</div>
 				<div class="slider-arrow slider-arrow_left" id="transparency-arrow_left">
 					<svg width="18" height="12" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12"
 						 preserveAspectRatio="xMinYMin meet">
@@ -839,7 +834,8 @@
 							fill="#322823"></path>
 				</svg>
 			</div>
-			<div class="reviews-slider">
+			<div class="holder">
+				<div class="reviews-slider">
 				<div class="reviews-slider__slide">
 					<div class="reviews-slider__slide-img"><img src="./images/reviews/ava1.jpg" alt=""></div>
 					<div class="reviews-slider__slide-date">05.02.2020</div>
@@ -880,6 +876,7 @@
 						ключ* в моей однокомнатной квартире. Предварительная смета была расписана подробно, понятно по каждому виду
 						работ. Фактическая смета ... <a class="link-reviews-detail">Подробнее</a></div>
 				</div>
+			</div>
 			</div><!-- /reviews-slider --></div>
 		<div class="slider-dots slider-dots-reviews slider-dots-base">
 			<div class="dot dot-reviews switch dot_active">
@@ -2206,6 +2203,7 @@
 			</div>
 		</div>
 	</div>
+</div>
 	<script src="./dist/bundle.js"></script>
 </body>
 </html>

@@ -8,6 +8,8 @@ import validPhone from './modules/validPhone'
 import tooltip from './modules/tooltip'
 import tabs from './modules/tabs'
 import sliderFade from './modules/sliderFade'
+import SliderCarousel from './modules/SliderCarousel'
+import accordion from './modules/accordion'
 
 
 //openClose phone
@@ -95,3 +97,54 @@ const transparencySection = document.querySelector('.popup-dialog-transparency')
     </div>
 `;
 sliderFade(transparencySlider, transparencySliderNav);
+
+
+//slider type carousel
+const carouselReviews = new SliderCarousel({
+    main: '.reviews-slider-wrap',
+    wrap: '.reviews-slider',
+    prev: '#reviews-arrow_left',
+    next: '#reviews-arrow_right',
+    slidesToShow: 1,
+    infinity: true
+
+});
+carouselReviews.init();
+
+
+const carouselTransparency = new SliderCarousel({
+    main: '.transparency-slider-wrap',
+    wrap: '.transparency-slider',
+    prev: '#transparency-arrow_left',
+    next: '#transparency-arrow_right',
+    slidesToShow: 3,
+    infinity: true,
+    responsive: [{
+        breakpoint: 1100,
+        slidesToShow: 1
+    }
+]});
+carouselTransparency.init();
+
+
+const carouselRepair = new SliderCarousel({
+    main: '.nav-wrap-repair',
+    wrap: '.nav-list-repair',
+    buttonVueSecond: true,
+    slidesToShow: 3,
+    infinity: true,
+    responsive: [{
+        breakpoint: 1024,
+        slidesToShow: 3,
+    },{
+        breakpoint: 768,
+        slidesToShow: 2,
+    },{
+        breakpoint: 575,
+        slidesToShow: 1,
+    }
+]});
+carouselRepair.init();
+
+//accordion
+accordion();
