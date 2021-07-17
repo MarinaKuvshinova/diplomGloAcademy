@@ -10,7 +10,13 @@ import tabs from './modules/tabs'
 import sliderFade from './modules/sliderFade'
 import SliderCarousel from './modules/SliderCarousel'
 import accordion from './modules/accordion'
+import getDataRepair from './modules/getDataRepair'
+import sendDataForm from './modules/sendDataForm'
 
+
+
+//getDataRepair
+getDataRepair();
 
 //openClose phone
 openClosePhone();
@@ -32,6 +38,7 @@ tooltip();
 
 //tabs
 tabs(document.getElementById('repair-types'));
+tabs(document.querySelector('.popup-repair-types'));
 
 
 //slider type Fade
@@ -98,6 +105,36 @@ const transparencySection = document.querySelector('.popup-dialog-transparency')
 `;
 sliderFade(transparencySlider, transparencySliderNav);
 
+//slider mobile-portfolio
+const portfolioMobileSection = document.querySelector('.portfolio'),
+    portfolioMobileSlider = portfolioMobileSection.querySelector('.sliderFade'),
+    portfolioMobileNav = `
+<div class="slider-counter slider-counter-responsive desktop-hide" id="portfolio-counter">
+    <div class="slider-counter-content">
+        <div class="slider-counter-content__current">1</div>
+        <div class="slider-counter-content__total">3</div>
+    </div>
+</div>
+<div class="slider-arrow slider-arrow_left slider-arrow-tablet-mobile slider-arrow-tablet-mobile_left tablet-hide desktop-hide"
+     id="portfolio-arrow-mobile_left">
+    <svg width="25" height="34" fill="none" viewBox="0 0 25 34" preserveAspectRatio="xMinYMin meet"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="M23 32L2 17 23 2" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+    </svg>
+</div>
+<div class="slider-arrow slider-arrow_right slider-arrow-tablet-mobile slider-arrow-tablet-mobile_right tablet-hide desktop-hide"
+     id="portfolio-arrow-mobile_right">
+    <svg width="25" height="34" fill="none" viewBox="0 0 25 34" preserveAspectRatio="xMinYMin meet"
+         xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2l21 15L2 32" stroke="#fff" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"
+              stroke-linejoin="round"></path>
+    </svg>
+</div>
+`;
+sliderFade(portfolioMobileSlider, portfolioMobileNav);
+
+
 
 //slider type carousel
 const carouselReviews = new SliderCarousel({
@@ -146,5 +183,61 @@ const carouselRepair = new SliderCarousel({
 ]});
 carouselRepair.init();
 
+const carouselPortfolioDesktop = new SliderCarousel({
+    main: '.portfolio-slider-wrap',
+    wrap: '.portfolio-slider',
+    prev: '#portfolio-arrow_left',
+    next: '#portfolio-arrow_right',
+    slidesToShow: 3,
+    infinity: false,
+    responsive: [{
+        breakpoint: 1140,
+        slidesToShow: 2,
+    },{
+        breakpoint: 900,
+        slidesToShow: 1,
+    }
+]});
+carouselPortfolioDesktop.init();
+
+const carouselFormula = new SliderCarousel({
+    main: '.formula-slider-wrap',
+    wrap: '.formula-slider',
+    prev: '#formula-arrow_left',
+    next: '#formula-arrow_right',
+    slidesToShow: 3,
+    infinity: true,
+    responsive: [{
+        breakpoint: 1025,
+        slidesToShow: 3,
+    },{
+        breakpoint: 900,
+        slidesToShow: 1,
+    }
+]});
+carouselFormula.init();
+
+
+const carouselRepairPopup = new SliderCarousel({
+    main: '.popup-dialog-repair-types .nav-wrap-repair',
+    wrap: '.nav-list-popup-repair',
+    buttonVueSecond: true,
+    slidesToShow: 3,
+    infinity: true,
+    responsive: [{
+        breakpoint: 1024,
+        slidesToShow: 2,
+    },{
+        breakpoint: 768,
+        slidesToShow: 1,
+    }
+]});
+carouselRepairPopup.init();
+
+
 //accordion
 accordion();
+
+
+//sendDataForm
+sendDataForm();

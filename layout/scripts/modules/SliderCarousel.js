@@ -25,6 +25,7 @@ class SliderCarousel {
 
         this.addCarouselClass();
         this.addStyle();
+        this.checkArrow();
 
         if (this.prev && this.next) {
             this.controlSlider();
@@ -69,17 +70,36 @@ class SliderCarousel {
                 this.options.position = this.options.maxPosition;
             }
             this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+            this.checkArrow();
         }
     }
 
     nextSlider() {
+console.log(1)
         if (this.options.infinity || this.options.position < this.options.maxPosition) {
             ++this.options.position;
             if (this.options.position > this.options.maxPosition) {
                 this.options.position = 0;
             }
             this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+            this.checkArrow();
         }
+    }
+
+    checkArrow() {
+        if (this.options.position === 0) {
+            this.main.classList.add('disablet-left');
+        } else {
+            this.main.classList.remove('disablet-left');
+        }
+
+        
+        if (this.options.position === this.options.maxPosition) {
+            this.main.classList.add('disablet-right');
+        } else {
+            this.main.classList.remove('disablet-right');
+        }
+
     }
 
     addArrow() {
@@ -135,6 +155,7 @@ class SliderCarousel {
                 this.options.maxPosition = this.slides.length - this.slidesToShow;
                 this.addStyle(); 
             }
+            this.checkArrow();
         };
 
         checkResponse();
