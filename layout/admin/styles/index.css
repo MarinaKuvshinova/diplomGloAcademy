@@ -110,6 +110,14 @@ body {
 }
 
 
+.main-auth .text-warning {
+    display: none;
+}
+
+
+.main-auth .unvalid .text-warning {
+    display: block;
+}
 
 .main-header {
     font-weight: 600;
@@ -531,6 +539,10 @@ body {
 
 #modal {
     display: none;
+}
+
+#modal.active {
+    display: flex;
 }
 
 .modal {

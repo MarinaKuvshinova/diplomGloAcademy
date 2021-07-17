@@ -1,6 +1,5 @@
 const sendDataForm = () => {
     const forms = document.querySelectorAll('form');
-
     const postData = (body) => {
         return fetch('./server.php', {
             method: 'POST',
@@ -35,8 +34,6 @@ const sendDataForm = () => {
             const button = form.querySelector('button');
             button.classList.add('disabled');
         }
-
-
 
         checked.addEventListener('change', (e) => {
             const parent = e.target.closest('form');
