@@ -94,6 +94,19 @@ class SliderCarousel {
                 this.wrap.style.transition = 'transform .5s ease-in-out';
             });
         });
+
+        this.wrap.addEventListener('click', (e) => {
+            const target = e.target;
+
+
+            if (target.closest('.formula-slider__slide') || target.classList.contains('formula-slider__slide')) {
+                
+                const s = document.querySelectorAll('.formula-slider-wrap .formula-slider__slide');
+                s.forEach(e => e.classList.remove('active-item'))
+
+                target.classList.add('active-item');
+            }
+        });
     }
 
     prevSlider() {
