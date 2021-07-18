@@ -9215,3 +9215,21 @@ strong {
 .thank-link{
     display: none;
 }
+
+.loaded {
+    font-family: Montserrat Alternates, sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-size: 21px;
+    text-align: center;
+    color: #322823;
+}
+
+.checkbox .validator-error {
+    top: 80%;
+}
+
+.wrapper_feedback .checkbox-feedback-block .validator-error {
+    top: 105%;
+}

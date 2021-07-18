@@ -4,14 +4,15 @@ import openClosePhone from './modules/openClosePhone';
 import openCloseMenu from './modules/openCloseMenu';
 import scrollTo from './modules/scrollTo';
 import openClosePopup from './modules/openClosePopup';
-import validPhone from './modules/validPhone'
-import tooltip from './modules/tooltip'
-import tabs from './modules/tabs'
-import sliderFade from './modules/sliderFade'
-import SliderCarousel from './modules/SliderCarousel'
-import accordion from './modules/accordion'
-import getDataRepair from './modules/getDataRepair'
-import sendDataForm from './modules/sendDataForm'
+import validPhone from './modules/validPhone';
+import tooltip from './modules/tooltip';
+import tabs from './modules/tabs';
+import sliderFade from './modules/sliderFade';
+import SliderCarousel from './modules/SliderCarousel';
+import accordion from './modules/accordion';
+import getDataRepair from './modules/getDataRepair';
+import sendDataForm from './modules/sendDataForm';
+import Validator from './modules/Validator';
 
 
 
@@ -240,4 +241,108 @@ accordion();
 
 
 //sendDataForm
-sendDataForm();
+
+const valid1 = new Validator({
+    selector: '#feedback1',
+    method: {
+        'feedback-input1': [
+            ['notEmpty'],
+            ['pattern', 'phone']
+        ],
+        'checkbox1': [
+            ['checked']
+        ]
+    }
+});
+
+valid1.init(sendDataForm);
+
+
+const valid2 = new Validator({
+    selector: '#feedback2',
+    method: {
+        'feedback-input2': [
+            ['notEmpty'],
+            ['pattern', 'phone']
+        ],
+        'feedback-input2-name': [
+            ['notEmpty'],
+            ['pattern', 'name']
+        ],
+        'checkbox2': [
+            ['checked']
+        ]
+    }
+});
+
+valid2.init(sendDataForm);
+
+const valid3 = new Validator({
+    selector: '#feedback3',
+    method: {
+        'feedback-input3': [
+            ['notEmpty'],
+            ['pattern', 'phone']
+        ],
+        'checkbox3': [
+            ['checked']
+        ]
+    }
+});
+
+valid3.init(sendDataForm);
+
+
+const valid4 = new Validator({
+    selector: '#feedback4',
+    method: {
+        'feedback-input4': [
+            ['notEmpty'],
+            ['pattern', 'phone']
+        ],
+        'feedback-input4-name': [
+            ['notEmpty'],
+            ['pattern', 'name']
+        ],
+        'checkbox4': [
+            ['checked']
+        ]
+    }
+});
+
+valid4.init(sendDataForm);
+
+
+const valid5 = new Validator({
+    selector: '#feedback3',
+    method: {
+        'feedback-input5': [
+            ['notEmpty'],
+            ['pattern', 'phone']
+        ],
+        'feedback-input5-name': [
+            ['notEmpty'],
+            ['pattern', 'name']
+        ],
+        'checkbox5': [
+            ['checked']
+        ]
+    }
+});
+
+valid5.init(sendDataForm);
+
+const valid6 = new Validator({
+    selector: '#feedback6',
+    method: {
+        'feedback-input6': [
+            ['notEmpty'],
+            ['pattern', 'phone']
+        ],
+        'checkbox6': [
+            ['checked']
+        ]
+    }
+});
+
+valid6.init(sendDataForm);

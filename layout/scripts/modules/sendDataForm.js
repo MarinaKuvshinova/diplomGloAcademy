@@ -1,5 +1,10 @@
-const sendDataForm = () => {
-    const forms = document.querySelectorAll('form');
+const sendDataForm = (formId) => {
+    const form = document.getElementById(formId),
+        errorMessage = 'Что то пошло не так...',
+        loadMessage = 'Загрузка...',
+        successMessage = 'Спасибо! Мы свами свяжемся!',
+        statusMessage = document.createElement('div');
+
     const postData = (body) => {
         return fetch('./server.php', {
             method: 'POST',
@@ -11,68 +16,36 @@ const sendDataForm = () => {
 
     };
 
-    forms.forEach(form => {
-        const checked = form.querySelector('input[type="checkbox"]');
-        const input = form.querySelectorAll('input[type="text"]');
-        const checkInput = (value) => {
-            const button = form.querySelector('button');
-            if (!value) {
-                button.classList.add('disabled');
+    const formData = new FormData(form),
+    body = {};
+
+    statusMessage.className = 'loaded';
+    statusMessage.textContent = loadMessage;
+
+    formData.forEach((value, key) => {
+        body[key] = value;
+    });
+
+    form.appendChild(statusMessage);
+
+    postData(body)
+        .then((response) => {
+            if (response.status === 200) {
+                setTimeout(() => {
+                    statusMessage.remove();
+                    form.reset();
+                    document.querySelector('.thank-link').click();
+                }, 2000);
             } else {
-                button.classList.remove('disabled');
+                throw new Error('status network not 200');
             }
-        };
-
-        input.forEach(ele => {
-            ele.addEventListener('input', (e) => {
-                checkInput(e.target.value);
-            });
-            checkInput(ele.value);
-        });
-
-        if (!checked.checked) {
-            const button = form.querySelector('button');
-            button.classList.add('disabled');
-        }
-
-        checked.addEventListener('change', (e) => {
-            const parent = e.target.closest('form');
-
-            if (e.target.checked) {
-                parent.querySelector('button').classList.remove('disabled');
-            } else {
-                parent.querySelector('button').classList.add('disabled');
-            }
-
-            input.forEach(ele => {
-                checkInput(ele.value);
-            });
-        });
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(form),
-            body = {};
-
-            formData.forEach((value, key) => {
-                body[key] = value;
-            });
-
-            postData(body)
-                .then((response) => {
-                    if (response.status === 200) {
-                        console.log(response.status);
-                        form.reset();
-                        document.querySelector('.thank-link').click();
-                    } else {
-                        throw new Error('status network not 200');
-                    }
-                }).catch(error => {
-                    console.error(error);
-                    
-            });
-
-        });
+        }).catch(error => {
+            statusMessage.textContent = errorMessage;
+            setTimeout(() => {
+                statusMessage.remove();
+                form.reset();
+            }, 2000);
+            console.error(error);
     });
 
 };
