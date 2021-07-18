@@ -64,16 +64,6 @@ const getData = async(url ='', data = {}) => {
     return await response.json();
 };
 
-const getItems = () => {
-    return getData(localhost + '/api/items')
-    .then(async (data) => {
-        initTable(data);
-        initSelect(Object.keys(await groupBy(data, 'type')));
-        return data;
-    })
-    .catch(error => console.warn(error));
-};
-
 const postData = async (url = '', data = {}) => {
     const response = await fetch(url, {
       method: 'POST', 
@@ -85,6 +75,39 @@ const postData = async (url = '', data = {}) => {
     });
     return await response.json();
   };
+
+const patchData = async (url = '', data = {}) => {
+  const response = await fetch(url, {
+    method: 'PATCH', 
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data) 
+  });
+  return await response.json();
+};
+
+const deleteData = async(url ='') => {
+    const response = await fetch(url, {
+        method: 'DELETE', 
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        }
+      });
+      return await response.json();
+};
+
+const getItems = () => {
+    return getData(localhost + '/api/items')
+    .then(async (data) => {
+        initTable(data);
+        initSelect(Object.keys(await groupBy(data, 'type')));
+        return data;
+    })
+    .catch(error => console.warn(error));
+};
 
 const saveItem = async (form) => {
     const type = form.querySelector('#type').value,
@@ -111,11 +134,12 @@ const showModal = (item) => {
         modal.querySelector('#name').value = item.name;
         modal.querySelector('#units').value = item.units;
         modal.querySelector('#cost').value = item.cost;
-
+        modal.classList.add('edit');
         modal.querySelector('.modal__header').textContent = 'Изменение услуги';
-
+        modal.dataset.id = item.id;
 
     } else {
+        modal.classList.remove('edit');
         modal.querySelector('.modal__header').textContent = 'Добавение новой услуги';
     }
 
@@ -145,6 +169,33 @@ const editItem = (id) => {
 };
 
 
+const deleteItem = (id) => {
+    return deleteData(`${localhost}/api/items/${id}`)
+    .then(async (data) => {
+        if (data) {
+            document.location.reload();
+        }
+    })
+    .catch(error => console.warn(error));
+};
+
+const saveChangeItem = async (form, id) => {
+    const type = form.querySelector('#type').value,
+        name = form.querySelector('#name').value,
+        units = form.querySelector('#units').value,
+        cost = form.querySelector('#cost').value;
+
+    const res = await patchData(`${localhost}/api/items/${id}`, { type, name, units, cost })
+        .then((data) => {
+            if (data !== null) {
+                console.log("Array Errors", data.errors);
+            } else {
+                document.location.reload();
+            }
+        })
+        .catch(error => console.warn(error));
+};
+
 const init = async () => {
     date = await getItems();
 
@@ -169,7 +220,11 @@ const init = async () => {
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         if (validate(e.currentTarget)) {
-            saveItem(e.currentTarget);
+            if (e.target.closest('.edit')) {
+                saveChangeItem(e.currentTarget, e.target.closest('#modal').dataset.id);
+            } else {
+                saveItem(e.currentTarget);
+            }
         }
     });
     form.addEventListener('input', (e) => {
@@ -186,15 +241,18 @@ const init = async () => {
         if (target.closest('.active') && target.closest('.button__close')) {
             modal.classList.remove('active');
             form.reset();
+            modal.removeAttribute('data-id');
         }
 
         if (target.closest('.active') && target.closest('.cancel-button')) {
             modal.classList.remove('active');
+            modal.removeAttribute('data-id');
             form.reset();
         }
 
         if (target.classList.contains('active')) {
             modal.classList.remove('active');
+            modal.removeAttribute('data-id');
             form.reset();
         }
     });
@@ -203,22 +261,25 @@ const init = async () => {
     const tbody = document.querySelector('tbody');
 
     tbody.addEventListener('click', async (e) => {
-        const target = e.target;
+        const target = e.target,
+            tr = target.closest('tr'),
+            id = tr.querySelector('.table__id').textContent;
 
         if (target.closest('.action-change')) {
-            const tr = target.closest('tr'),
-                id = tr.querySelector('.table__id').textContent;
             const item = await editItem(id);
 
             if (item) {
                 showModal(item);
             }
         }
+
+        if (target.closest('.action-remove')) {
+            const id = tr.querySelector('.table__id').textContent;
+            
+            await deleteItem(id);
+
+        }
     })
-
-
-
-
 
 
 };
