@@ -208,6 +208,8 @@ const carouselFormula = new SliderCarousel({
     next: '#formula-arrow_right',
     slidesToShow: 3,
     infinity: true,
+    activeClass: true,
+    circulat: true,
     responsive: [{
         breakpoint: 1025,
         slidesToShow: 3,

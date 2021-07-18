@@ -118,7 +118,7 @@ const saveItem = async (form) => {
     const res = await postData(localhost + '/api/items', { type, name, units, cost })
         .then((data) => {
             if (data.errors.length > 0) {
-                console.log("Array Errors", data.errors)
+                console.log("Array Errors", data)
             } else {
                 form.reset();
             }
@@ -188,7 +188,7 @@ const saveChangeItem = async (form, id) => {
     const res = await patchData(`${localhost}/api/items/${id}`, { type, name, units, cost })
         .then((data) => {
             if (data !== null) {
-                console.log("Array Errors", data.errors);
+                console.log("Array Errors", data);
             } else {
                 document.location.reload();
             }

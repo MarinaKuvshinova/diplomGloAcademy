@@ -1,5 +1,5 @@
 class SliderCarousel {
-    constructor({main, wrap, position = 0, next, prev, slidesToShow = 3, infinity = false, responsive = [], buttonVueSecond = false}) {
+    constructor({main, wrap, position = 0, next, prev, slidesToShow = 3, infinity = false, responsive = [], buttonVueSecond = false, activeClass = false, circulat = false}) {
         if (!main || !wrap) {
             console.warn('slider-carousel: Необходимо два свойства, "main" и "wrap"');
         }
@@ -11,6 +11,8 @@ class SliderCarousel {
         this.prev = document.querySelector(prev);
         this.slidesToShow = slidesToShow;
         this.buttonVueSecond = buttonVueSecond;
+        this.activeClass = activeClass;
+        this.circulat = circulat;
         this.options = {
             position,
             infinity,
@@ -18,6 +20,7 @@ class SliderCarousel {
             maxPosition: this.slides.length - this.slidesToShow
         };
         this.responsive = responsive;
+        this.direction = 0;
 
     }
 
@@ -35,6 +38,10 @@ class SliderCarousel {
         }
         if (this.responsive) {
             this.responseInit();
+        }
+        
+        if (this.activeClass) {
+            this.addClassActive(this.options.position);
         }
     }
 
@@ -58,31 +65,73 @@ class SliderCarousel {
         }
     }
 
+    addClassActive(position, step = 0) {
+        if (step === 1) {
+            this.slides[position - 1].classList.remove('active-item');
+        }
+
+        if (step === -1 ){
+            this.slides[position + 1].classList.remove('active-item');
+        }
+
+        this.slides[position].classList.add('active-item');
+    }
+
     controlSlider() {
         this.prev.addEventListener('click', this.prevSlider.bind(this));
         this.next.addEventListener('click', this.nextSlider.bind(this));
+        this.wrap.addEventListener('transitionend', () => {
+            if (this.direction === -1) {
+                this.wrap.appendChild(this.wrap.firstElementChild);
+                
+            } else if (this.direction === 1) {
+                this.wrap.prepend(this.wrap.lastElementChild);
+            }
+
+            this.wrap.style.transition = 'none';
+            this.wrap.style.transform = 'translate(0)';
+            setTimeout(() => {
+                this.wrap.style.transition = 'transform .5s ease-in-out';
+            });
+        });
     }
 
     prevSlider() {
-        if (this.options.infinity || this.options.position > 0) {
-            --this.options.position;
-            if (this.options.position < 0) {
-                this.options.position = this.options.maxPosition;
+        if (this.direction === -1) {
+            this.direction = 1;
+            this.wrap.appendChild(this.wrap.firstElementChild);
+        }
+        if (!this.circulat) {
+            if (this.options.infinity || this.options.position > 0) {
+                --this.options.position;
+                if (this.options.position < 0) {
+                    this.options.position = this.options.maxPosition;
+                }
+                this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+                this.checkArrow();
+                this.addClassActive(this.options.position, -1);
             }
-            this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
-            this.checkArrow();
+        } else {
+            this.wrap.style.justifyContent = 'flex-end';
+            this.wrap.style.transform = `translateX(${this.options.widthSlide}%)`;
         }
     }
 
     nextSlider() {
-console.log(1)
-        if (this.options.infinity || this.options.position < this.options.maxPosition) {
-            ++this.options.position;
-            if (this.options.position > this.options.maxPosition) {
-                this.options.position = 0;
+        this.direction = -1;
+        if (!this.circulat) {
+            if (this.options.infinity || this.options.position < this.options.maxPosition) {
+                ++this.options.position;
+                if (this.options.position > this.options.maxPosition) {
+                    this.options.position = 0;
+                }
+                this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
+                this.checkArrow();
+                this.addClassActive(this.options.position, 1);
             }
-            this.wrap.style.transform = `translateX(-${this.options.position * this.options.widthSlide}%)`;
-            this.checkArrow();
+        } else {
+            this.wrap.style.justifyContent = 'flex-start';
+            this.wrap.style.transform = `translateX(-${this.options.widthSlide}%)`;
         }
     }
 

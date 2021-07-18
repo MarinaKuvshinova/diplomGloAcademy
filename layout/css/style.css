@@ -767,12 +767,25 @@ template, [hidden] {
 
 .services-slider {
     position: relative;
-    top: -40px;
+    top: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.services-item__img {
+    transform: scale(.8);
+}
+
+.services-slider > * {
+    width: 50%;
 }
 
 @media (min-width: 576px) {
     .services-slider {
         display: none;
+    }
+    .services-item__img {
+        transform: scale(1);
     }
 }
 
@@ -1166,6 +1179,16 @@ template, [hidden] {
 .formula-slider__slide .formula-item__icon__descr {
     font-size: 18px;
 }
+
+.formula .wrapper_small.desktop-hide .holder{
+    overflow: hidden;
+}
+
+.formula .wrapper_small.desktop-hide .carousel__item {
+    margin: 0 0 auto;
+}
+
+
 
 @media (max-width: 575px) {
     .formula-slider-wrap {

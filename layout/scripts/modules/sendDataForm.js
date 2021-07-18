@@ -35,7 +35,12 @@ const sendDataForm = (formId) => {
                     statusMessage.remove();
                     form.reset();
                     document.querySelector('.thank-link').click();
+                    setTimeout(() => {
+                        document.querySelector('.close-thank').click();
+                    }, 2000);
                 }, 2000);
+                
+
             } else {
                 throw new Error('status network not 200');
             }
