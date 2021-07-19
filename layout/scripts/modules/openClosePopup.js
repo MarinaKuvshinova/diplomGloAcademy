@@ -14,12 +14,18 @@ const openClosePopup = () => {
     openButtons.forEach(button => {
         button.addEventListener('click', e => {
             const target = e.target;
+            if(target.closest('.open-popup') || target.classList.contains('open-popup')) {
+                
+                const t = target.closest('.open-popup');
+                [...t.classList].find( elem => {
+                    if (/open-/.test(elem) && elem !== 'open-popup') {
+                        classPopup = elem.replace('open-', '');
+                    }
+                });
+   
+            }
 
-            [...target.classList].find( elem => {
-                if (/open-/.test(elem) && elem !== 'open-popup') {
-                    classPopup = elem.replace('open-', '');
-                }
-            });
+            
             togglePopup(classPopup);
         });
     });
@@ -36,7 +42,7 @@ const openClosePopup = () => {
                 classPopup = [...parent.classList].filter(elem => elem !== 'popup' && elem !== 'active-popup')[0];
             }
 
-            if (target.closest(`.${classPopup}.active-popup`) && target.matches('.close')) {
+            if (target.closest(`.${classPopup}.active-popup`) && target.matches('.close') || target.closest('.popup-menu-nav__item') || target.classList.contains('.active-menu')) {
                 togglePopup();
             }
     

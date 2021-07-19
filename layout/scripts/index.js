@@ -316,7 +316,7 @@ valid4.init(sendDataForm);
 
 
 const valid5 = new Validator({
-    selector: '#feedback3',
+    selector: '#feedback5',
     method: {
         'feedback-input5': [
             ['notEmpty'],

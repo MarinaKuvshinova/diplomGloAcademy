@@ -4853,8 +4853,8 @@ div.wave-block:nth-child(17):after {
 }
 
 .popup:not(.popup-menu) {
-    -webkit-transition: all 1s ease-in-out;
-    transition: all 1s ease-in-out;
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
     opacity: 0;
 }
 .popup.active-popup {
@@ -4967,8 +4967,14 @@ div.wave-block:nth-child(17):after {
     height: 100%;
     background: url("../images/main/menu-bg.png");
     background-size: cover;
-    -webkit-transition: 1s;
-    transition: 1s;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+
+.open-menu {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
 }
 
 @media (max-width: 1024px) {
@@ -9182,7 +9188,7 @@ strong {
     display: none;
 }
 
-.popup-menu.active-menu .popup-dialog-menu {
+.popup-menu.active-popup .popup-dialog-menu {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
 }

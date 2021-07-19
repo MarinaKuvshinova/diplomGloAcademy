@@ -12,6 +12,7 @@ class Validator {
     init(callback) {
         this.applyStyle();
         this.setPattern();
+        console.log("1", this.elementsForm)
         this.elementsForm.forEach(elem => elem.addEventListener('change', this.checkIt.bind(this)));
         this.form.addEventListener('submit', e => {
             this.elementsForm.forEach(elem => this.checkIt({ target: elem }));
@@ -20,6 +21,7 @@ class Validator {
                 e.preventDefault();
             } else {
                 e.preventDefault();
+                console.log(this.form.id)
                 callback(this.form.id);
             }
         });
@@ -34,9 +36,11 @@ class Validator {
                 return true;
             },
             pattern(elem, pattern) {
+                console.log(elem)
                 return  pattern.test(elem.value);
             },
             checked(elem) {
+                console.log(elem)
                 return elem.checked;
             }
         };
